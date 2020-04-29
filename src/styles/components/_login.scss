@@ -1,0 +1,40 @@
+#user-form {
+    border: 1px solid rgb(135, 177, 255);
+    display: inline-block;
+    background-color: white;
+    position: absolute;
+    top: 40%;
+    left: 41%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+
+#user-form h1 {
+    background-color: rgb(49, 129, 221);
+    margin: 0;
+    padding: 3px;
+}
+
+#user-form form {
+    padding-top: 10px;
+    
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 10px
+}
+
+#user-form label {
+    display: block;
+    width: 25%;
+    margin-right: 25px;
+}
+
+#user-form div {
+    margin-bottom: 10px;
+    display: flex;
+}
+
+#user-form button {
+    display: block;
+    margin: auto;
+}
