@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons';
 
-// const submit = (e) => {
-//     e.preventdefault()
-// }
 
 
 
 class InstagramFeedItem extends React.Component {
     constructor(props) {
         super(props);
+
+        // state
+        // Comment is to hold comments for each instagramFeedItem
+        // Error is to determine whether the image has resulted in an error or not
+
         this.state = {
             comment: [],
             error: false

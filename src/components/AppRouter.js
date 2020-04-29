@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Switch, Link,NavLink } from 'react-router-dom';
 import React from 'react';
 import Instagram from './Instagram';
-// import InstagramFeed from './InstagramFeed';
 import MyFeed from './InstagramFeed';
 
+
+// Routes the Home Page to the Feed Page
 const AppRouter = () => (
     <BrowserRouter>
         <div>

@@ -6,6 +6,8 @@ import InstagramFeed from './InstagramFeed';
 export default class Instagram extends React.Component {
     constructor(props) {
         super(props);
+        // userInformation is login info, for now it only stores one
+        // status, when status is false, wrong password has been entered and will display an error
         this.state = {
             userInformation: ['anthonylee', 'password'],
             status: true,
@@ -18,6 +20,7 @@ export default class Instagram extends React.Component {
         const password = e.target.elements.password.value
         const username = e.target.elements.username.value
 
+        // when correct password has been entered correctly, will push user to their feed
         if (this.state.userInformation[0] === username && this.state.userInformation[1] === password){
             this.props.history.push('/MyFeed')
         } else {

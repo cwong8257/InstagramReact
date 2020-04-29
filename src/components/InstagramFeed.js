@@ -9,13 +9,14 @@ class MyFeed extends React.Component {
 
     constructor(props) {
         super(props);
+       
         this.state = {
             images: []
         }
     }
 
     
-   
+    // stores all images from server inside the state
     async componentDidMount(){
       const response =  await fetch('https://image-server-codesmith.firebaseapp.com/images')
       const data = await response.json();
