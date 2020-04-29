@@ -1,22 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons';
-
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 class InstagramFeedItem extends React.Component {
     constructor(props) {
-        super(props);
-
-        // state
-        // Comment is to hold comments for each instagramFeedItem
-        // Error is to determine whether the image has resulted in an error or not
+        super(props)
 
         this.state = {
             comment: [],
-            error: false
+            error: false,
+            liked: false
         }
         this.addComment = this.addComment.bind(this)
         this.likeComment = this.likeComment.bind(this)
@@ -34,13 +27,9 @@ class InstagramFeedItem extends React.Component {
     }
 
     likeComment() {
-        console.log('you have liked the picture')
-        const heart = document.getElementById(this.props.imageItem)
-        if (heart.style.color === 'red'){
-            heart.style.color = 'black'
-        } else {
-            heart.style.color = 'red'
-        }
+        this.setState((prevState) => ({
+            liked: !prevState.liked
+        }))
     }
 
     error(){
@@ -50,23 +39,26 @@ class InstagramFeedItem extends React.Component {
     }
 
     render (){ 
-        if (this.state.error){return null}
-        else {
+        if (this.state.error) {
+            return null
+        }
+
+        const heartClass = this.state.liked ? 'red' : ''
+
         return (
-            <div id='content'>
-                <img src={this.props.imageItem} onDoubleClick={this.likeComment} onError={this.error} ></img>
-                {this.state.comment.map((text) => {
-                    return <p key={text} >{text}</p>
-                })}
-                
+            <div className="content">
+                <img src={this.props.imageItem} onDoubleClick={this.likeComment} onError={this.error} />
+
+                {this.state.comment.map((text) => <p key={text}>{text}</p>)}
                 
                 <form onSubmit={this.addComment}> 
-                    <input type='text' name='comments' id='comment' />
-                    <input type='submit' name='comment' id='comment' />
+                    <input type="text" name="comments" className="comment" />
+                    <input type="submit" name="comment" className="comment" />
                 </form>
-                <FontAwesomeIcon id={this.props.imageItem} icon={faHeart} />
+                <FontAwesomeIcon className={heartClass} icon={faHeart} />
             </div>
-    )}}
+        )
+    }
 }
 
 export default InstagramFeedItem

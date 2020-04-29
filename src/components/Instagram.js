@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Redirect, BrowserRouter, Route, Switch, Link,NavLink } from 'react-router-dom';
-import InstagramFeed from './InstagramFeed'; 
+import { USERNAME, PASSWORD } from '../constants'
 
 export default class Instagram extends React.Component {
     constructor(props) {
@@ -9,22 +7,26 @@ export default class Instagram extends React.Component {
         // userInformation is login info, for now it only stores one
         // status, when status is false, wrong password has been entered and will display an error
         this.state = {
-            userInformation: ['anthonylee', 'password'],
-            status: true,
+            status: true
         }
+        this.usernameInput = React.createRef();
+        this.passwordInput = React.createRef();
         this.onFormSubmit = this.onFormSubmit.bind(this)
     }
 
     onFormSubmit (e){
         e.preventDefault()
-        const password = e.target.elements.password.value
-        const username = e.target.elements.username.value
+        console.log(USERNAME, PASSWORD)
+        const username = this.usernameInput.current.value
+        const password = this.passwordInput.current.value
+        console.log(username, password)
+
 
         // when correct password has been entered correctly, will push user to their feed
-        if (this.state.userInformation[0] === username && this.state.userInformation[1] === password){
+        if (USERNAME === username && PASSWORD === password){
+
             this.props.history.push('/MyFeed')
         } else {
-            console.log('false')
             this.setState(() => ({
                 status: false
             }))
@@ -33,33 +35,21 @@ export default class Instagram extends React.Component {
 
     render(){
         return (
-            <div>
-                <Form 
-                onFormSubmit={this.onFormSubmit}
-                status={this.state.status}
-                 />
+            <div className="user-form">
+                <h1>Instagram</h1>
+                <form className="myForm" onSubmit={this.onFormSubmit}>
+                    <div className="username-div">
+                        <label htmlFor="username">Username: </label>
+                        <input type="text" name="username" ref={this.usernameInput} className="username" />
+                    </div>
+                    <div className="password-div">
+                        <label htmlFor="password">Password: </label>
+                        <input type="password" name="password" ref={this.passwordInput} className="password" />
+                    </div>
+                    <button type="submit">Login</button>
+                    {!this.state.status && <p className="bad-password">You have entered a wrong username/password! Please try again!</p>}
+                </form>
             </div>
         )
     }
-
-}
-
-const Form = (props) => {
-    return (
-        <div id='user-form'>
-            <h1>Instagram</h1>
-            <form id='myForm' onSubmit={props.onFormSubmit}>
-                <div id='username-div'>
-                    <label>Username: </label>
-                    <input type='text' name='username' id='username' />
-                </div>
-                <div id='password-div'>
-                    <label>Password: </label>
-                    <input type='password' name='password' id='password' />
-                </div>
-                <button type='submit'>Login</button>
-                {!props.status && <p id='bad-password'>You have entered a wrong username/password! Please try again!</p>}
-            </form>
-        </div>
-    )
 }

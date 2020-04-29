@@ -1,12 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Redirect, BrowserRouter, Route, Switch, Link,NavLink } from 'react-router-dom';
-import InstagramFeedItem from './FeedItem';
-class MyFeed extends React.Component {
-    // state = {
-    //     images: []
-    // }
 
+import InstagramFeedItem from './FeedItem';
+
+class MyFeed extends React.Component {
     constructor(props) {
         super(props);
        
@@ -18,10 +14,9 @@ class MyFeed extends React.Component {
     
     // stores all images from server inside the state
     async componentDidMount(){
-      const response =  await fetch('https://image-server-codesmith.firebaseapp.com/images')
+      const response = await fetch('https://image-server-codesmith.firebaseapp.com/images');
       const data = await response.json();
-      
-      
+
       this.setState({ images: data })
     }
 
@@ -33,8 +28,8 @@ class MyFeed extends React.Component {
                 <h1>Anthony Lee</h1>
                 {this.state.images.map((image) => {
                     return <InstagramFeedItem 
-                    key={image} 
-                    imageItem={image}
+                        key={image} 
+                        imageItem={image}
                     />
                 })}
            </div>
